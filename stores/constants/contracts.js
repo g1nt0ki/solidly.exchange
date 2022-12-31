@@ -26,7 +26,7 @@ export const FTM_SYMBOL = 'FTM'
 export const FTM_DECIMALS = 18
 export const FTM_LOGO = 'https://assets.coingecko.com/coins/images/4001/large/Fantom.png'
 
-export const FACTORY_ADDRESS = '0x3fAaB499b519fdC5819e3D7ed0C26111904cbc28'
+export const FACTORY_ADDRESS = '0xfd742b576c123b6447c98ffaa54941e3fc41ebe7'
 export const FACTORY_ABI = abis.factoryABI
 
 export const ROUTER_ADDRESS = '0xa38cd27185a464914D3046f0AB9d43356B34829D'
