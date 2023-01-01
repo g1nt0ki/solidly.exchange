@@ -14,9 +14,9 @@ export const VE_TOKEN_DECIMALS = 18
 export const VE_TOKEN_LOGO = 'https://prod.solidly.exchange/Solidly-O.svg'
 export const VE_TOKEN_ABI = abis.veTokenABI
 
-export const WFTM_ADDRESS = '0x21be370d5312f44cb42ce377bc9b8a0cef1a4c83'
-export const WFTM_NAME = 'Wrapped Fantom'
-export const WFTM_SYMBOL = 'WFTM'
+export const WFTM_ADDRESS = '0x82af49447d8a07e3bd95bd0d56f35241523fbab1'
+export const WFTM_NAME = 'Wrapped Ethereum'
+export const WFTM_SYMBOL = 'WETH'
 export const WFTM_DECIMALS = 18
 export const WFTM_ABI = abis.wftmABI
 
@@ -29,7 +29,7 @@ export const FTM_LOGO = 'https://assets.coingecko.com/coins/images/4001/large/Fa
 export const FACTORY_ADDRESS = '0xfd742b576c123b6447c98ffaa54941e3fc41ebe7'
 export const FACTORY_ABI = abis.factoryABI
 
-export const ROUTER_ADDRESS = '0xa38cd27185a464914D3046f0AB9d43356B34829D'
+export const ROUTER_ADDRESS = '0xfa3e4050dd383b8df1990831e59a82c350379bd7'
 export const ROUTER_ABI = abis.routerABI
 
 export const VE_DIST_ADDRESS = '0xA5CEfAC8966452a78d6692837b2ba83d19b57d07'
@@ -44,4 +44,4 @@ export const GAUGE_ABI = abis.gaugeABI
 export const BRIBE_ABI = abis.bribeABI
 export const TOKEN_ABI = abis.tokenABI
 
-export const MULTICALL_ADDRESS = '0x11473d6e641df17cd6331d45b135e35b49edbea8'
+export const MULTICALL_ADDRESS = '0x842eC2c7D803033Edf55E478F461FC547Bc54EB2'

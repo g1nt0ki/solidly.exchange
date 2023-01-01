@@ -6,7 +6,7 @@ import { NetworkConnector } from "@web3-react/network-connector";
 const POLLING_INTERVAL = 12000;
 const RPC_URLS = {
   250: "https://rpc.ftm.tools",
-  42161: "https://1rpc.io/arb",
+  42161: "https://arb1.arbitrum.io/rpc",
   4002: "https://rpc.testnet.fantom.network"
 };
 

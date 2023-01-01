@@ -24,7 +24,7 @@ class Store {
       assets: [],
       govToken: null,
       veToken: null,
-      pairs: [],
+      pairs: pairData,
       vestNFTs: [],
       rewards: {
         bribes: [],
@@ -752,25 +752,31 @@ class Store {
 
   _getBaseAssets = async () => {
     try {
-      const response = await fetch(`${process.env.NEXT_PUBLIC_API}/api/v1/baseAssets`, {
-      	method: 'get',
-      	headers: {
-          'Authorization': `Basic ${process.env.NEXT_PUBLIC_API_TOKEN}`,
-        }
-      })
-      const baseAssetsCall = await response.json()
+      // const response = await fetch(`${process.env.NEXT_PUBLIC_API}/api/v1/baseAssets`, {
+      // 	method: 'get',
+      // 	headers: {
+      //     'Authorization': `Basic ${process.env.NEXT_PUBLIC_API_TOKEN}`,
+      //   }
+      // })
+      // const baseAssetsCall = await response.json()
 
-      let baseAssets = baseAssetsCall.data
+      // let baseAssets = baseAssetsCall.data
+      let allData = pairData.reduce((a, i) => {
+        a[i.token0.address] = i.token0
+        a[i.token1.address] = i.token1
+        return a
+      }, {})
+      let baseAssets = Object.values(allData)
 
-      const nativeFTM = {
-        address: CONTRACTS.FTM_ADDRESS,
-        decimals: CONTRACTS.FTM_DECIMALS,
-        logoURI: CONTRACTS.FTM_LOGO,
-        name: CONTRACTS.FTM_NAME,
-        symbol: CONTRACTS.FTM_SYMBOL
-      }
+      // const nativeFTM = {
+      //   address: CONTRACTS.FTM_ADDRESS,
+      //   decimals: CONTRACTS.FTM_DECIMALS,
+      //   logoURI: CONTRACTS.FTM_LOGO,
+      //   name: CONTRACTS.FTM_NAME,
+      //   symbol: CONTRACTS.FTM_SYMBOL
+      // }
 
-      baseAssets.unshift(nativeFTM)
+      // baseAssets.unshift(nativeFTM)
 
       let localBaseAssets = this.getLocalAssets()
 
@@ -784,14 +790,21 @@ class Store {
 
   _getRouteAssets = async () => {
     try {
-      const response = await fetch(`${process.env.NEXT_PUBLIC_API}/api/v1/routeAssets`, {
-      	method: 'get',
-      	headers: {
-          'Authorization': `Basic ${process.env.NEXT_PUBLIC_API_TOKEN}`,
-        }
-      })
-      const routeAssetsCall = await response.json()
-      return routeAssetsCall.data
+      // const response = await fetch(`${process.env.NEXT_PUBLIC_API}/api/v1/routeAssets`, {
+      // 	method: 'get',
+      // 	headers: {
+      //     'Authorization': `Basic ${process.env.NEXT_PUBLIC_API_TOKEN}`,
+      //   }
+      // })
+      // const routeAssetsCall = await response.json()
+      // return routeAssetsCall.data
+      let allData = pairData.reduce((a, i) => {
+        a[i.token0.address] = {...i.token0, chainId: 42161}
+        a[i.token1.address] = {...i.token1, chainId: 42161}
+        return a
+      }, {})
+      return Object.values(allData)
+      return []
     } catch(ex) {
       console.log(ex)
       return []
@@ -800,14 +813,7 @@ class Store {
 
   _getPairs = async () => {
     try {
-      const response = await fetch(`${process.env.NEXT_PUBLIC_API}/api/v1/pairs`, {
-      	method: 'get',
-      	headers: {
-          'Authorization': `Basic ${process.env.NEXT_PUBLIC_API_TOKEN}`,
-        }
-      })
-      const pairsCall = await response.json()
-      return pairsCall.data
+      return pairData
     } catch(ex) {
       console.log(ex)
       return []
@@ -4411,3 +4417,5 @@ class Store {
 }
 
 export default Store
+
+const pairData = [{"decimals":18,"name":"VolatileV1 AMM - DTOKEN/USDC","symbol":"vAMM-DTOKEN/USDC","address":"0x4c0f5FA6d290038147f1cD16Db7685c7C656Be81","isStable":false,"token0":{"decimals":18,"name":"Dtoken","symbol":"DTOKEN","address":"0xfd808d72761ad2423f100c53aa2f2c7f133def0a","isWhitelisted":true},"token1":{"decimals":6,"name":"USD Coin (Arb1)","symbol":"USDC","address":"0xff970a61a04b1ca14834a43f5de4533ebddb5cc8","isWhitelisted":true}},{"decimals":18,"name":"StableV1 AMM - DAI/USDC","symbol":"sAMM-DAI/USDC","address":"0xc09cc9BED5A02EBcf3D56c8bE2d3A4EF5b984CAD","isStable":true,"token0":{"decimals":18,"name":"Dai Stablecoin","symbol":"DAI","address":"0xda10009cbd5d07dd0cecc66161fc93d7c9000da1","isWhitelisted":true},"token1":{"decimals":6,"name":"USD Coin (Arb1)","symbol":"USDC","address":"0xff970a61a04b1ca14834a43f5de4533ebddb5cc8","isWhitelisted":true}},{"decimals":18,"name":"StableV1 AMM - USDT/USDC","symbol":"sAMM-USDT/USDC","address":"0x8594caEc488e339DfD20918021D117F68879708c","isStable":true,"token0":{"decimals":6,"name":"Tether USD","symbol":"USDT","address":"0xfd086bc7cd5c481dcc9c85ebe478a1c0b69fcbb9","isWhitelisted":true},"token1":{"decimals":6,"name":"USD Coin (Arb1)","symbol":"USDC","address":"0xff970a61a04b1ca14834a43f5de4533ebddb5cc8","isWhitelisted":true}},{"decimals":18,"name":"VolatileV1 AMM - WETH/USDC","symbol":"vAMM-WETH/USDC","address":"0xa88a48f1B41f047399a5746732665191D3a1082F","isStable":false,"token0":{"decimals":18,"name":"Wrapped Ether","symbol":"WETH","address":"0x82af49447d8a07e3bd95bd0d56f35241523fbab1","isWhitelisted":true},"token1":{"decimals":6,"name":"USD Coin (Arb1)","symbol":"USDC","address":"0xff970a61a04b1ca14834a43f5de4533ebddb5cc8","isWhitelisted":true}},{"decimals":18,"name":"VolatileV1 AMM - GMX/USDC","symbol":"vAMM-GMX/USDC","address":"0x26bbdE071414E6973584eE5C9a6382B43c030516","isStable":false,"token0":{"decimals":18,"name":"GMX","symbol":"GMX","address":"0xfc5a1a6eb076a2c7ad06ed22c90d7e710e35ad0a","isWhitelisted":true},"token1":{"decimals":6,"name":"USD Coin (Arb1)","symbol":"USDC","address":"0xff970a61a04b1ca14834a43f5de4533ebddb5cc8","isWhitelisted":true}},{"decimals":18,"name":"VolatileV1 AMM - wstETH/WETH","symbol":"vAMM-wstETH/WETH","address":"0x855e4E5BFE8B250A491249797f47d207BEb9b204","isStable":false,"token0":{"decimals":18,"name":"Wrapped liquid staked Ether 2.0","symbol":"wstETH","address":"0x5979d7b546e38e414f7e9822514be443a4800529","isWhitelisted":true},"token1":{"decimals":18,"name":"Wrapped Ether","symbol":"WETH","address":"0x82af49447d8a07e3bd95bd0d56f35241523fbab1","isWhitelisted":true}},{"decimals":18,"name":"StableV1 AMM - FRAX/USDC","symbol":"sAMM-FRAX/USDC","address":"0xa507F19bc5062cC303D6ced2d07696E1e4ADFDb2","isStable":true,"token0":{"decimals":18,"name":"Frax","symbol":"FRAX","address":"0x17fc002b466eec40dae837fc4be5c67993ddbd6f","isWhitelisted":true},"token1":{"decimals":6,"name":"USD Coin (Arb1)","symbol":"USDC","address":"0xff970a61a04b1ca14834a43f5de4533ebddb5cc8","isWhitelisted":true}},{"decimals":18,"name":"VolatileV1 AMM - WBTC/WETH","symbol":"vAMM-WBTC/WETH","address":"0x7E09Cb0504bc20b0e48FeBaaf89A36555Dd0f9C4","isStable":false,"token0":{"decimals":8,"name":"Wrapped BTC","symbol":"WBTC","address":"0x2f2a2543b76a4166549f7aab2e75bef0aefc5b0f","isWhitelisted":true},"token1":{"decimals":18,"name":"Wrapped Ether","symbol":"WETH","address":"0x82af49447d8a07e3bd95bd0d56f35241523fbab1","isWhitelisted":true}},{"decimals":18,"name":"StableV1 AMM - MAI/USDC","symbol":"sAMM-MAI/USDC","address":"0x179010FfC1e0C157c18CAE720F4e2C80C7ED3BB8","isStable":true,"token0":{"decimals":18,"name":"Mai Stablecoin","symbol":"MAI","address":"0x3f56e0c36d275367b8c502090edf38289b3dea0d","isWhitelisted":true},"token1":{"decimals":6,"name":"USD Coin (Arb1)","symbol":"USDC","address":"0xff970a61a04b1ca14834a43f5de4533ebddb5cc8","isWhitelisted":true}},{"decimals":18,"name":"VolatileV1 AMM - MAGIC/WETH","symbol":"vAMM-MAGIC/WETH","address":"0x0a3785A3c425Bd785e18a3D57c25bA8FD510Da9D","isStable":false,"token0":{"decimals":18,"name":"MAGIC","symbol":"MAGIC","address":"0x539bde0d7dbd336b79148aa742883198bbf60342","isWhitelisted":true},"token1":{"decimals":18,"name":"Wrapped Ether","symbol":"WETH","address":"0x82af49447d8a07e3bd95bd0d56f35241523fbab1","isWhitelisted":true}},{"decimals":18,"name":"VolatileV1 AMM - wstETH/USDC","symbol":"vAMM-wstETH/USDC","address":"0xCD5fd149F6DBC230740Ce33A28dA647DfBd98CeB","isStable":false,"token0":{"decimals":18,"name":"Wrapped liquid staked Ether 2.0","symbol":"wstETH","address":"0x5979d7b546e38e414f7e9822514be443a4800529","isWhitelisted":true},"token1":{"decimals":6,"name":"USD Coin (Arb1)","symbol":"USDC","address":"0xff970a61a04b1ca14834a43f5de4533ebddb5cc8","isWhitelisted":true}},{"decimals":18,"name":"VolatileV1 AMM - RDNT/WETH","symbol":"vAMM-RDNT/WETH","address":"0x287045992375788191e8fda2796C4A5b31348DEa","isStable":false,"token0":{"decimals":18,"name":"Radiant","symbol":"RDNT","address":"0x0c4681e6c0235179ec3d4f4fc4df3d14fdd96017","isWhitelisted":true},"token1":{"decimals":18,"name":"Wrapped Ether","symbol":"WETH","address":"0x82af49447d8a07e3bd95bd0d56f35241523fbab1","isWhitelisted":true}},{"decimals":18,"name":"StableV1 AMM - MIM/USDC","symbol":"sAMM-MIM/USDC","address":"0x262Db5655e0A5549b33E01cc823fDc23c7068a4B","isStable":true,"token0":{"decimals":18,"name":"Magic Internet Money","symbol":"MIM","address":"0xfea7a6a0b346362bf88a9e4a88416b77a57d6c2a","isWhitelisted":true},"token1":{"decimals":6,"name":"USD Coin (Arb1)","symbol":"USDC","address":"0xff970a61a04b1ca14834a43f5de4533ebddb5cc8","isWhitelisted":true}},{"decimals":18,"name":"VolatileV1 AMM - UMAMI/WETH","symbol":"vAMM-UMAMI/WETH","address":"0xA816C0A34400DAaC4F00ADeD55fC368bf8F1175B","isStable":false,"token0":{"decimals":9,"name":"Umami","symbol":"UMAMI","address":"0x1622bf67e6e5747b81866fe0b85178a93c7f86e3","isWhitelisted":true},"token1":{"decimals":18,"name":"Wrapped Ether","symbol":"WETH","address":"0x82af49447d8a07e3bd95bd0d56f35241523fbab1","isWhitelisted":true}},{"decimals":18,"name":"StableV1 AMM - USDs/USDC","symbol":"sAMM-USDs/USDC","address":"0x94EF7E7e1ce1C1D13F17d0Ff4336E0f11c68865b","isStable":true,"token0":{"decimals":18,"name":"Sperax USD","symbol":"USDs","address":"0xd74f5255d557944cf7dd0e45ff521520002d5748","isWhitelisted":true},"token1":{"decimals":6,"name":"USD Coin (Arb1)","symbol":"USDC","address":"0xff970a61a04b1ca14834a43f5de4533ebddb5cc8","isWhitelisted":true}},{"decimals":18,"name":"VolatileV1 AMM - L2DAO/WETH","symbol":"vAMM-L2DAO/WETH","address":"0xBB172Dd210872AA52E87305a66718D1BD80e44bf","isStable":false,"token0":{"decimals":18,"name":"Layer2DAO","symbol":"L2DAO","address":"0x2cab3abfc1670d1a452df502e216a66883cdf079","isWhitelisted":true},"token1":{"decimals":18,"name":"Wrapped Ether","symbol":"WETH","address":"0x82af49447d8a07e3bd95bd0d56f35241523fbab1","isWhitelisted":true}},{"decimals":18,"name":"VolatileV1 AMM - fBOMB/USDs","symbol":"vAMM-fBOMB/USDs","address":"0xEDf26869323d7036DFa886115079930F77Ec0b62","isStable":false,"token0":{"decimals":18,"name":"Fantom Bomb","symbol":"fBOMB","address":"0x74ccbe53f77b08632ce0cb91d3a545bf6b8e0979","isWhitelisted":true},"token1":{"decimals":18,"name":"Sperax USD","symbol":"USDs","address":"0xd74f5255d557944cf7dd0e45ff521520002d5748","isWhitelisted":true}},{"decimals":18,"name":"VolatileV1 AMM - JONES/WETH","symbol":"vAMM-JONES/WETH","address":"0x1129189deeB6ACb5E665d88f342F9489A690F47d","isStable":false,"token0":{"decimals":18,"name":"Jones DAO","symbol":"JONES","address":"0x10393c20975cf177a3513071bc110f7962cd67da","isWhitelisted":true},"token1":{"decimals":18,"name":"Wrapped Ether","symbol":"WETH","address":"0x82af49447d8a07e3bd95bd0d56f35241523fbab1","isWhitelisted":true}},{"decimals":18,"name":"StableV1 AMM - DTOKEN/USDC","symbol":"sAMM-DTOKEN/USDC","address":"0x0679820F5468F8eb4a4b4113D178A925076741fD","isStable":true,"token0":{"decimals":18,"name":"Dtoken","symbol":"DTOKEN","address":"0xfd808d72761ad2423f100c53aa2f2c7f133def0a","isWhitelisted":true},"token1":{"decimals":6,"name":"USD Coin (Arb1)","symbol":"USDC","address":"0xff970a61a04b1ca14834a43f5de4533ebddb5cc8","isWhitelisted":true}},{"decimals":18,"name":"VolatileV1 AMM - USDT/USDC","symbol":"vAMM-USDT/USDC","address":"0x08587D025DDeCA2563dC78238A6d69A8F54E86C9","isStable":false,"token0":{"decimals":6,"name":"Tether USD","symbol":"USDT","address":"0xfd086bc7cd5c481dcc9c85ebe478a1c0b69fcbb9","isWhitelisted":true},"token1":{"decimals":6,"name":"USD Coin (Arb1)","symbol":"USDC","address":"0xff970a61a04b1ca14834a43f5de4533ebddb5cc8","isWhitelisted":true}},{"decimals":18,"name":"VolatileV1 AMM - MIM/USDC","symbol":"vAMM-MIM/USDC","address":"0x1EFac7b1E7200d4849F08EFc90491dF484A0fEcD","isStable":false,"token0":{"decimals":18,"name":"Magic Internet Money","symbol":"MIM","address":"0xfea7a6a0b346362bf88a9e4a88416b77a57d6c2a","isWhitelisted":true},"token1":{"decimals":6,"name":"USD Coin (Arb1)","symbol":"USDC","address":"0xff970a61a04b1ca14834a43f5de4533ebddb5cc8","isWhitelisted":true}},{"decimals":18,"name":"VolatileV1 AMM - JONES/USDC","symbol":"vAMM-JONES/USDC","address":"0x63F29EB262fcF5A3e024A42eD9Ba06683fb1e82f","isStable":false,"token0":{"decimals":18,"name":"Jones DAO","symbol":"JONES","address":"0x10393c20975cf177a3513071bc110f7962cd67da","isWhitelisted":true},"token1":{"decimals":6,"name":"USD Coin (Arb1)","symbol":"USDC","address":"0xff970a61a04b1ca14834a43f5de4533ebddb5cc8","isWhitelisted":true}},{"decimals":18,"name":"StableV1 AMM - MAGIC/WETH","symbol":"sAMM-MAGIC/WETH","address":"0x0A9bCb2A3159fB6f4102024D0f5c99138a6D33FB","isStable":true,"token0":{"decimals":18,"name":"MAGIC","symbol":"MAGIC","address":"0x539bde0d7dbd336b79148aa742883198bbf60342","isWhitelisted":true},"token1":{"decimals":18,"name":"Wrapped Ether","symbol":"WETH","address":"0x82af49447d8a07e3bd95bd0d56f35241523fbab1","isWhitelisted":true}},{"decimals":18,"name":"StableV1 AMM - wstETH/WETH","symbol":"sAMM-wstETH/WETH","address":"0x0f8E530847f31067faC346109b04B5BAf99EBCd4","isStable":true,"token0":{"decimals":18,"name":"Wrapped liquid staked Ether 2.0","symbol":"wstETH","address":"0x5979d7b546e38e414f7e9822514be443a4800529","isWhitelisted":true},"token1":{"decimals":18,"name":"Wrapped Ether","symbol":"WETH","address":"0x82af49447d8a07e3bd95bd0d56f35241523fbab1","isWhitelisted":true}},{"decimals":18,"name":"VolatileV1 AMM - DAI/USDC","symbol":"vAMM-DAI/USDC","address":"0x41184a3EE20c36E3c475ADc7738fBd4b2F5f7e9A","isStable":false,"token0":{"decimals":18,"name":"Dai Stablecoin","symbol":"DAI","address":"0xda10009cbd5d07dd0cecc66161fc93d7c9000da1","isWhitelisted":true},"token1":{"decimals":6,"name":"USD Coin (Arb1)","symbol":"USDC","address":"0xff970a61a04b1ca14834a43f5de4533ebddb5cc8","isWhitelisted":true}},{"decimals":18,"name":"StableV1 AMM - RDNT/WETH","symbol":"sAMM-RDNT/WETH","address":"0x109b1268b4AfE5E116f12E7bc7c52dAD03901811","isStable":true,"token0":{"decimals":18,"name":"Radiant","symbol":"RDNT","address":"0x0c4681e6c0235179ec3d4f4fc4df3d14fdd96017","isWhitelisted":true},"token1":{"decimals":18,"name":"Wrapped Ether","symbol":"WETH","address":"0x82af49447d8a07e3bd95bd0d56f35241523fbab1","isWhitelisted":true}},{"decimals":18,"name":"VolatileV1 AMM - DAI/USDT","symbol":"vAMM-DAI/USDT","address":"0x0aD8B21FB2Ab9C50BF9A564C0479e4f86E7531bA","isStable":false,"token0":{"decimals":18,"name":"Dai Stablecoin","symbol":"DAI","address":"0xda10009cbd5d07dd0cecc66161fc93d7c9000da1","isWhitelisted":true},"token1":{"decimals":6,"name":"Tether USD","symbol":"USDT","address":"0xfd086bc7cd5c481dcc9c85ebe478a1c0b69fcbb9","isWhitelisted":true}}]
