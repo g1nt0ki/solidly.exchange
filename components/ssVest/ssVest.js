@@ -40,7 +40,7 @@ export default function ssVest() {
     };
   }, []);
 
-  useEffect(async () => {
+  useEffect(() => {
     ssUpdated()
   }, [router.query.id])
 

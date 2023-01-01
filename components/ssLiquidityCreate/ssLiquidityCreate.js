@@ -102,7 +102,7 @@ export default function SSLiquidityCreate() {
     };
   }, []);
 
-  useEffect(async () => {
+  useEffect(() => {
     ssUpdated()
   }, [router.query.address])
 

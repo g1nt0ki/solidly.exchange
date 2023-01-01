@@ -189,7 +189,7 @@ export default function ssRewards() {
           </Grid>
           <Grid item lg={true} md={true} sm={false} xs={false}>
             <div className={ classes.disclaimerContainer }>
-              <Typography className={ classes.disclaimer }>Rewards are an estimation that aren't exact till the supply -> rewardPerToken calculations have run</Typography>
+              <Typography className={ classes.disclaimer }>Rewards are an estimation that aren't exact till the supply to rewardPerToken calculations have run</Typography>
             </div>
           </Grid>
           <Grid item lg='auto' md='auto' sm='12' xs='12'>

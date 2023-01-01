@@ -209,7 +209,7 @@ export default function ssLiquidityManage() {
     };
   }, []);
 
-  useEffect(async () => {
+  useEffect(() => {
     ssUpdated()
   }, [router.query.address])
 
@@ -1304,7 +1304,7 @@ function AssetSelect({ type, value, assetOptions, onSelect, disabled }) {
     setOpen(true)
   };
 
-  useEffect(async function() {
+  useEffect(function() {
 
     let ao = assetOptions.filter((asset) => {
       if(search && search !== '') {
@@ -1326,7 +1326,7 @@ function AssetSelect({ type, value, assetOptions, onSelect, disabled }) {
 
     //no options in our default list and its an address we search for the address
     if(ao.length === 0 && search && search.length === 42) {
-      const baseAsset = await stores.stableSwapStore.getBaseAsset(event.target.value, true, true)
+      // const baseAsset = await stores.stableSwapStore.getBaseAsset(event.target.value, true, true)
     }
 
     return () => {
