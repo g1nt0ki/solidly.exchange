@@ -351,8 +351,8 @@ export default function ssLiquidityManage() {
       error = true
     } else {
       if(!asset0.balance || isNaN(asset0.balance) || BigNumber(asset0.balance).lte(0))  {
-        setAmount0Error('Invalid balance')
-        error = true
+        // setAmount0Error('Invalid balance')
+        // error = true
       } else if(BigNumber(amount0).lte(0)) {
         setAmount0Error('Invalid amount')
         error = true
@@ -367,8 +367,8 @@ export default function ssLiquidityManage() {
       error = true
     } else {
       if(!asset1.balance || isNaN(asset1.balance) || BigNumber(asset1.balance).lte(0))  {
-        setAmount1Error('Invalid balance')
-        error = true
+        // setAmount1Error('Invalid balance')
+        // error = true
       } else if(BigNumber(amount1).lte(0)) {
         setAmount1Error('Invalid amount')
         error = true
@@ -421,8 +421,8 @@ export default function ssLiquidityManage() {
       error = true
     } else {
       if(!asset0.balance || isNaN(asset0.balance) || BigNumber(asset0.balance).lte(0))  {
-        setAmount0Error('Invalid balance')
-        error = true
+        // setAmount0Error('Invalid balance')
+        // error = true
       } else if(BigNumber(amount0).lte(0)) {
         setAmount0Error('Invalid amount')
         error = true
@@ -437,8 +437,8 @@ export default function ssLiquidityManage() {
       error = true
     } else {
       if(!asset1.balance || isNaN(asset1.balance) || BigNumber(asset1.balance).lte(0))  {
-        setAmount1Error('Invalid balance')
-        error = true
+        // setAmount1Error('Invalid balance')
+        // error = true
       } else if(BigNumber(amount1).lte(0)) {
         setAmount1Error('Invalid amount')
         error = true
@@ -475,8 +475,8 @@ export default function ssLiquidityManage() {
       error = true
     } else {
       if(!asset0.balance || isNaN(asset0.balance) || BigNumber(asset0.balance).lte(0))  {
-        setAmount0Error('Invalid balance')
-        error = true
+        // setAmount0Error('Invalid balance')
+        // error = true
       } else if(BigNumber(amount0).lte(0)) {
         setAmount0Error('Invalid amount')
         error = true
@@ -491,8 +491,8 @@ export default function ssLiquidityManage() {
       error = true
     } else {
       if(!asset1.balance || isNaN(asset1.balance) || BigNumber(asset1.balance).lte(0))  {
-        setAmount1Error('Invalid balance')
-        error = true
+        // setAmount1Error('Invalid balance')
+        // error = true
       } else if(BigNumber(amount1).lte(0)) {
         setAmount1Error('Invalid amount')
         error = true
@@ -537,8 +537,8 @@ export default function ssLiquidityManage() {
       error = true
     } else {
       if(!asset0.balance || isNaN(asset0.balance) || BigNumber(asset0.balance).lte(0))  {
-        setAmount0Error('Invalid balance')
-        error = true
+        // setAmount0Error('Invalid balance')
+        // error = true
       } else if(BigNumber(amount0).lte(0)) {
         setAmount0Error('Invalid amount')
         error = true
@@ -553,8 +553,8 @@ export default function ssLiquidityManage() {
       error = true
     } else {
       if(!asset1.balance || isNaN(asset1.balance) || BigNumber(asset1.balance).lte(0))  {
-        setAmount1Error('Invalid balance')
-        error = true
+        // setAmount1Error('Invalid balance')
+        // error = true
       } else if(BigNumber(amount1).lte(0)) {
         setAmount1Error('Invalid amount')
         error = true
@@ -620,8 +620,8 @@ export default function ssLiquidityManage() {
       error = true
     } else {
       if(withdrawAsset && withdrawAsset.gauge && (!withdrawAsset.gauge.balance || isNaN(withdrawAsset.gauge.balance) || BigNumber(withdrawAsset.gauge.balance).lte(0)))  {
-        setWithdrawAmountError('Invalid balance')
-        error = true
+        // setWithdrawAmountError('Invalid balance')
+        // error = true
       } else if(BigNumber(withdrawAmount).lte(0)) {
         setWithdrawAmountError('Invalid amount')
         error = true
@@ -1326,7 +1326,7 @@ function AssetSelect({ type, value, assetOptions, onSelect, disabled }) {
 
     //no options in our default list and its an address we search for the address
     if(ao.length === 0 && search && search.length === 42) {
-      // const baseAsset = await stores.stableSwapStore.getBaseAsset(event.target.value, true, true)
+      stores.stableSwapStore.getBaseAsset(event.target.value, true, true)
     }
 
     return () => {

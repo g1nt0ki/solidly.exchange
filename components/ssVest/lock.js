@@ -86,8 +86,8 @@ export default function ssLock({ govToken, veToken }) {
       error = true
     } else {
       if(!govToken.balance || isNaN(govToken.balance) || BigNumber(govToken.balance).lte(0))  {
-        setAmountError('Invalid balance')
-        error = true
+        // setAmountError('Invalid balance')
+        // error = true
       } else if(BigNumber(amount).lte(0)) {
         setAmountError('Invalid amount')
         error = true

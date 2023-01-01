@@ -24,7 +24,7 @@ class Store {
       assets: [],
       govToken: null,
       veToken: null,
-      pairs: pairData,
+      pairs: [],
       vestNFTs: [],
       rewards: {
         bribes: [],
@@ -855,7 +855,7 @@ class Store {
       }
 
       this._getGovTokenInfo(web3, account)
-      await this._getBaseAssetInfo(web3, account)
+      await this._getBaseAssetInfo(web3, account, true)
       await this._getPairInfo(web3, account)
     } catch(ex) {
       console.log(ex)
@@ -4259,7 +4259,7 @@ class Store {
         voterContract.methods.listing_fee().call()
       ])
 
-      const token = await this.getBaseAsset(search)
+      const token = await this.getBaseAsset(search, true, true)
       token.isWhitelisted = isWhitelisted
       token.listingFee = BigNumber(listingFee).div(10**veToken.decimals).toFixed(veToken.decimals)
 

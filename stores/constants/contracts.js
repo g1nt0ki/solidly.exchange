@@ -1,8 +1,8 @@
 import abis from "../abis";
 
-export const GOV_TOKEN_ADDRESS = '0x888EF71766ca594DED1F0FA3AE64eD2941740A20'
-export const GOV_TOKEN_NAME = 'Solid'
-export const GOV_TOKEN_SYMBOL = 'SOLID'
+export const GOV_TOKEN_ADDRESS = '0xFd808d72761Ad2423F100c53Aa2F2c7F133dEF0a'
+export const GOV_TOKEN_NAME = 'Dtoken'
+export const GOV_TOKEN_SYMBOL = 'DTOKEN'
 export const GOV_TOKEN_DECIMALS = 18
 export const GOV_TOKEN_LOGO = 'https://prod.solidly.exchange/Solidly-O.svg'
 export const GOV_TOKEN_ABI = abis.tokenABI
@@ -21,8 +21,8 @@ export const WFTM_DECIMALS = 18
 export const WFTM_ABI = abis.wftmABI
 
 export const FTM_ADDRESS = 'FTM'
-export const FTM_NAME = 'Fantom'
-export const FTM_SYMBOL = 'FTM'
+export const FTM_NAME = 'Ethereum'
+export const FTM_SYMBOL = 'ETH'
 export const FTM_DECIMALS = 18
 export const FTM_LOGO = 'https://assets.coingecko.com/coins/images/4001/large/Fantom.png'
 
@@ -32,10 +32,10 @@ export const FACTORY_ABI = abis.factoryABI
 export const ROUTER_ADDRESS = '0xfa3e4050dd383b8df1990831e59a82c350379bd7'
 export const ROUTER_ABI = abis.routerABI
 
-export const VE_DIST_ADDRESS = '0xA5CEfAC8966452a78d6692837b2ba83d19b57d07'
+export const VE_DIST_ADDRESS = '0x93c057c0a665d30594c18e65a75f295b906cc3e1'
 export const VE_DIST_ABI = abis.veDistABI
 
-export const VOTER_ADDRESS = '0xdC819F5d05a6859D2faCbB4A44E5aB105762dbaE'
+export const VOTER_ADDRESS = '0xba77a7696d0d0d4ce0ea3a078a56632c88554f7e'
 export const VOTER_ABI = abis.voterABI
 
 export const ERC20_ABI = abis.erc20ABI

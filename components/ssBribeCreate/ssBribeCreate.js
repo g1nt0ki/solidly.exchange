@@ -99,8 +99,8 @@ export default function ssBribeCreate() {
       error = true
     } else {
       if(!asset.balance || isNaN(asset.balance) || BigNumber(asset.balance).lte(0))  {
-        setAmountError('Invalid balance')
-        error = true
+        // setAmountError('Invalid balance')
+        // error = true
       } else if(BigNumber(amount).lt(0)) {
         setAmountError('Invalid amount')
         error = true

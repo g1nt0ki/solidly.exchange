@@ -452,8 +452,8 @@ const useStyles = makeStyles((theme) => ({
 
 const getLocalToggles = () => {
   let localToggles = {
-    toggleActive: true,
-    toggleActiveGauge: true,
+    toggleActive: false,
+    toggleActiveGauge: false,
     toggleVariable: true,
     toggleStable: true
   }
@@ -657,8 +657,8 @@ export default function EnhancedTable({ pairs }) {
   const router = useRouter();
 
   const [order, setOrder] = useState('desc');
-  const [orderBy, setOrderBy] = useState('stakedBalance');
-  const [rowsPerPage, setRowsPerPage] = useState(10);
+  const [orderBy, setOrderBy] = useState('poolBalance');
+  const [rowsPerPage, setRowsPerPage] = useState(100);
   const [page, setPage] = useState(0);
 
   const localToggles = getLocalToggles()
@@ -1014,7 +1014,7 @@ export default function EnhancedTable({ pairs }) {
           </Table>
         </TableContainer>
         <TablePagination
-          rowsPerPageOptions={[5, 10, 25]}
+          rowsPerPageOptions={[10, 25, 100]}
           component="div"
           count={filteredPairs.length}
           rowsPerPage={rowsPerPage}

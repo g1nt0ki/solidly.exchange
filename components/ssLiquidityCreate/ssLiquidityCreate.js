@@ -127,8 +127,8 @@ export default function SSLiquidityCreate() {
       error = true
     } else {
       if(!asset0.balance || isNaN(asset0.balance) || BigNumber(asset0.balance).lte(0))  {
-        setAmount0Error('Invalid balance')
-        error = true
+        // setAmount0Error('Invalid balance')
+        // error = true
       } else if(BigNumber(amount0).lte(0)) {
         setAmount0Error('Invalid amount')
         error = true
@@ -143,8 +143,8 @@ export default function SSLiquidityCreate() {
       error = true
     } else {
       if(!asset1.balance || isNaN(asset1.balance) || BigNumber(asset1.balance).lte(0))  {
-        setAmount1Error('Invalid balance')
-        error = true
+        // setAmount1Error('Invalid balance')
+        // error = true
       } else if(BigNumber(amount1).lte(0)) {
         setAmount1Error('Invalid amount')
         error = true
@@ -188,8 +188,8 @@ export default function SSLiquidityCreate() {
       error = true
     } else {
       if(!asset0.balance || isNaN(asset0.balance) || BigNumber(asset0.balance).lte(0))  {
-        setAmount0Error('Invalid balance')
-        error = true
+        // setAmount0Error('Invalid balance')
+        // error = true
       } else if(BigNumber(amount0).lte(0)) {
         setAmount0Error('Invalid amount')
         error = true
@@ -204,8 +204,8 @@ export default function SSLiquidityCreate() {
       error = true
     } else {
       if(!asset1.balance || isNaN(asset1.balance) || BigNumber(asset1.balance).lte(0))  {
-        setAmount1Error('Invalid balance')
-        error = true
+        // setAmount1Error('Invalid balance')
+        // error = true
       } else if(BigNumber(amount1).lte(0)) {
         setAmount1Error('Invalid amount')
         error = true
@@ -539,7 +539,7 @@ function AssetSelect({ type, value, assetOptions, onSelect }) {
 
     //no options in our default list and its an address we search for the address
     if(filteredOptions.length === 0 && event.target.value && event.target.value.length === 42) {
-      const baseAsset = await stores.stableSwapStore.getBaseAsset(event.target.value, true, true)
+      stores.stableSwapStore.getBaseAsset(event.target.value, true, true)
     }
   }
 
