@@ -212,9 +212,6 @@ function Navigation(props) {
 
       <div className={classes.navigationContent}>{renderNavs()}</div>
 
-      { warningOpen &&
-        <SSWarning close={ closeWarning } />
-      }
 
     </div>
   );
